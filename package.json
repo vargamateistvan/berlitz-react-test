@@ -8,9 +8,17 @@
   },
   "author": "Varga Mate Istvan",
   "dependencies": {
+    "@babel/core": "^7.4.3",
+    "@csstools/normalize.css": "^10.1.0",
+    "antd": "^3.20.5",
+    "eslint": "^5.16.0",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-react": "^7.12.4",
+    "node-sass": "^4.12.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-scripts": "3.0.1"
+    "react-scripts": "^3.0.1",
+    "typescript": "^3.5.3"
   },
   "scripts": {
     "start": "react-scripts start",

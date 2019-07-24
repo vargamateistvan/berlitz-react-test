@@ -24,15 +24,19 @@ function Product() {
         }, 2000)
     }
 
+    const getProductImage = () => {
+        return `/images/ath-msr7-${selectedColor}.jpg`
+    }
+
     return (
         <Card>
             <div style={{
                 display: "flex",
-                justifyContent: "center"
+                justifyContent: "center",
+                flexFlow: "row wrap"
             }}>
                 <div style={{
                     maxWidth: 500,
-                    float: "left"
                 }}>
                     <Title level={1}>Audio-Technica ATH-MSR7</Title>
                     <Text type="secondary">2017 Best Headphones of the Year Award Winner</Text>
@@ -53,10 +57,11 @@ function Product() {
 
                     <div 
                         style={{
-                            fontSize: 30
+                            fontSize: 30,
+                            marginBottom: 25
                         }}
                     >
-                        <Text strong>$59.99</Text>
+                        <Text strong style={{marginRight: 20}}>$59.99</Text>
                         <Text strong delete type="secondary">$89.99</Text>
                     </div>
 
@@ -74,7 +79,7 @@ function Product() {
                         defaultValue={selectedColor}
                         onChange={handleColorChange}
                         style={{
-                            marginBottom: 25
+                            marginBottom: 50
                         }}
                     >
                         <Option value="black">Black</Option>
@@ -85,18 +90,22 @@ function Product() {
 
                     <Button 
                         type="primary"
+                        size="large"
                         loading={isLoadingButton}
                         onClick={addToCart}
                     >
                         {buttonText}
                     </Button>
-                </div>
 
-                <div style={{
-                    maxWidth: 500
-                }}>
-                    <img alt="product" src={`/images/ath-msr7-${selectedColor}.jpg`} width="500"/>
                 </div>
+                <img 
+                    alt="product" 
+                    src={getProductImage()} 
+                    style={{
+                        width: 500,
+                        height: "100%",
+                    }}
+                />
             </div>
         </Card>
     )
