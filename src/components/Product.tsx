@@ -5,11 +5,26 @@ const { Option } = Select
 const { TabPane } = Tabs
 const { Title, Text } = Typography;
 
-function Product() {
+type Props = {
+    product: {
+        title: string
+        subTitle: string
+        description: string
+        detail: string
+        colors: any
+        price: string
+        sale: string
+    }
+}
+
+function Product(props: Props) {
+    const { product } = props
+
     const [selectedColor, setSelectedColor] = React.useState("black")
     const [buttonText, setButtonText] = React.useState("ADD TO CART")
     const [isLoadingButton, setIsLoadingButton] = React.useState(false)
 
+    // @ts-ignore
     const handleColorChange = value => {
         setSelectedColor(value)
     }
@@ -25,7 +40,7 @@ function Product() {
     }
 
     const getProductImage = () => {
-        return `/images/ath-msr7-${selectedColor}.jpg`
+        return product.colors[selectedColor]
     }
 
     return (
@@ -38,8 +53,8 @@ function Product() {
                 <div style={{
                     maxWidth: 500,
                 }}>
-                    <Title level={1}>Audio-Technica ATH-MSR7</Title>
-                    <Text type="secondary">2017 Best Headphones of the Year Award Winner</Text>
+                    <Title level={1}>{ product.title }</Title>
+                    <Text type="secondary">{ product.subTitle }</Text>
                     <Tabs 
                         size="default"
                         style={{
@@ -47,12 +62,8 @@ function Product() {
                             marginTop: 25
                         }}
                     >
-                        <TabPane tab="DESCRIPTION" key="1">
-                            Springing from Audio-Technica’s rich heritage in professional audio, the ATH-MSR7 Over-Ear High-Resolution Audio Headphones are designed to reproduce Hi-Res Audio, allowing users to hear music the way it was intended. The over-ear headphones are outfitted with exclusive 45 mm True Motion Drivers, which utilize lightweight voice coils, a custom-mounted printed circuit board and specially designed diaphragm to improve transient response and minimize sound distortion for rich, detailed audio reproduction. 
-                        </TabPane>
-                        <TabPane tab="DETAIL" key="2">
-                            The ATH-MSR7 headphones also feature multi-layered air damping technology for extended mid-to-low frequency response. The housings, designed to “mirror” the full shape of the ear, are constructed of an aluminum/magnesium mix, layered to provide a lightweight, rigid structure that reduces unwanted resonance. Three precisely placed vents within these layers work to control air flow and improve dynamics.
-                        </TabPane>
+                        <TabPane tab="DESCRIPTION" key="1">{ product.description }</TabPane>
+                        <TabPane tab="DETAIL" key="2">{ product.detail }</TabPane>
                     </Tabs>
 
                     <div 
@@ -61,8 +72,12 @@ function Product() {
                             marginBottom: 25
                         }}
                     >
-                        <Text strong style={{marginRight: 20}}>$59.99</Text>
-                        <Text strong delete type="secondary">$89.99</Text>
+                        {product.sale ? 
+                            <div> 
+                                <Text strong style={{marginRight: 20}}>{ product.sale }</Text>
+                                <Text strong delete type="secondary">{ product.price }</Text>
+                            </div>
+                        : <Text strong>{ product.price }</Text>}
                     </div>
 
                     <Text
@@ -82,8 +97,9 @@ function Product() {
                             marginBottom: 50
                         }}
                     >
-                        <Option value="black">Black</Option>
-                        <Option value="brown">Brown</Option>
+                        {Object.keys(product.colors).map(color => {
+                            return <Option value={color} key={color}>{ color.toUpperCase() }</Option>
+                        })}
                     </Select>
 
                     <br/>

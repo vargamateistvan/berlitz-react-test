@@ -1,13 +1,16 @@
 import React from 'react';
 import './App.css';
 import "antd/dist/antd.css";
+import headphone from "./headphone.json"
 
-import Product from "./components/Product"
+import Product from "./components/Product.tsx"
 
 function App() {
   return (
     <div className="App">
-      <Product></Product>
+      <Product
+        product={headphone}
+      ></Product>
     </div>
   );
 }
